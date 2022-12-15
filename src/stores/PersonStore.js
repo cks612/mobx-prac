@@ -1,4 +1,4 @@
-import { makeObservable, observable } from "mobx";
+import { computed, makeObservable, observable } from "mobx";
 
 export default class PersonStore {
   @observable
@@ -6,6 +6,11 @@ export default class PersonStore {
 
   @observable
   age = 39;
+
+  @computed
+  get age10() {
+    return Math.floor(this.age / 10) * 10;
+  }
 
   constructor() {
     makeObservable(this);
