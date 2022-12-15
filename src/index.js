@@ -4,13 +4,15 @@ import App from "./App";
 import { observable } from "mobx";
 import PersonContext from "./contexts/PersonContext";
 import PersonStore from "./stores/PersonStore";
+import { Provider } from "mobx-react";
+import RootStore from "./stores/RootStore";
 
 // const isLogin = observable(true);
 // const person = observable({
 //   name: "Voyage",
 //   age: 29,
 // });
-const personStore = new PersonStore();
+// const personStore = new PersonStore();
 
 // setInterval(() => {
 //   personStore.age++;
@@ -28,11 +30,13 @@ const personStore = new PersonStore();
 
 // personStore.age = 40;
 
+const rootStore = new RootStore();
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <PersonContext.Provider value={personStore}>
+    <Provider {...rootStore}>
       <App />
-    </PersonContext.Provider>
+    </Provider>
   </React.StrictMode>
 );
