@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import React, { useContext } from "react";
 import PersonContext from "./contexts/PersonContext";
 import autobind from "autobind-decorator";
-import { computed } from "mobx";
+import { action, computed, runInAction } from "mobx";
 
 function App() {
   const personStore = useContext(PersonContext);
@@ -12,9 +12,13 @@ function App() {
   const age10 = computed(() => {
     return Math.floor(personStore.age / 10) * 10;
   }).get();
+  console.log(personStore.age, personStore.name);
 
   const click = () => {
-    personStore.plus();
+    // personStore.plus();
+    setTimeout(() => {
+      personStore.testAction();
+    }, 500);
   };
   return (
     <div className="App">
@@ -23,7 +27,9 @@ function App() {
         <p>
           <button onClick={click}>plus</button>
         </p>
-        <p>{age10}</p>
+        <p>
+          {personStore.age},{personStore.name}
+        </p>
       </header>
     </div>
   );
